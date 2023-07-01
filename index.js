@@ -4,6 +4,13 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.get('/generar-imagen-seminario', async (req, res) => {
   const autor = req.query.autor || 'Autor';
   const title = req.query.title || 'Título';
